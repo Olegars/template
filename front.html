@@ -22,8 +22,8 @@
           <li
             v-for="(match,index_match) in matches"
             :key="index_match"
-            :class="{'selected':(selected===index_match)}">
-            <div class="searchResult">{{match}}</div>
+            :class="['searchResult',{'selected':(selected===index_match)}]">
+            <div class="searchItem">{{match}}</div>
             <div class="searchImage" :style="'background: url(tile.png) no-repeat  center center;background-size: cover;'"></div>
           </li>
         </ul>
@@ -106,13 +106,18 @@
     margin-right: 5px;
     float: right;
   }
-  .searchResult{
+  .searchItem{
+    width: 30px;
     height: 50px;
     display: inline-block;
+  }
+  .searchResult{
+    height: 50px;
     margin-right: 5px;
     margin-left: 5px;
-    vertical-align: top;
-    float: left;
+  }
+  .selected{
+    background-color: #ffe48e;
   }
   .adm-menu{
     width: 50px;

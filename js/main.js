@@ -13,7 +13,9 @@ const app = new Vue({
       checkboxSizeGroup: [],
       matches: [
         'one',
-        'two'
+        'two',
+        'three',
+        'four'
       ],
       selected: 0,
       selectedItem: null,
