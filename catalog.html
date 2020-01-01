@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/index.css" >
+</head>
+<div id="app">
+  <!--Крошки-->
+  <a href="/">Главная</a> |
+  <a href="/">Каталог</a> |
+  <a href="/">BALI</a>
+  <!--Крошки-->
+  <!--Пагинация-->
+  <div class="pager">
+    <div class="pageMarker" ><i class="icon-left-open"></i></div>
+    <div v-for="(pageNumber) in pages" class="pagerItem" :key="pageNumber">
+      {{pageNumber}}
+    </div>
+    <div class="pageMarker"><i class="icon-right-open"></i></div>
+    <div class="sum">20</div>
+  </div>
+  <!--Пагинация-->
+  <div class="content">
+    <!--Фильтры-->
+    <div class="bm-menu">
+      <div class="terms" v-if="GetTerms">
+        <div  v-for="term in GetTerms">
+          <a class="" href="/">{{term}}</a>
+        </div>
+        <div class="colorFilter" v-if="GetAggregations.color">
+          <div
+            v-for="(color) in GetAggregations.color"
+            :style="{backgroundColor:color}"
+            class="colorSwatch">
+          </div>
+        </div>
+        <div v-if="GetAggregations.brand">
+          <div
+            class="filter check-material green"
+            v-for="(brand,brand_index) in GetAggregations.brand"
+            :key="brand_index">
+            <input
+              type="checkbox"
+              :id="brand"
+              :value="brand"
+              v-model="checkboxBrandGroup"
+            >
+            <label class="chSmall" :for="brand"></label>
+            {{brand}} (10)
+          </div>
+        </div>
+        <div v-if="GetAggregations.male">
+          <div
+            v-for="(male,male_index) in GetAggregations.male"
+            :key="male_index"
+            class="filter check-material green">
+            <input
+              type="checkbox"
+              :id="male"
+              :value="male"
+              v-model="checkboxMaleGroup"
+            >
+            <label class="chSmall" :for="male"></label>
+            {{male}} ({{5}})
+          </div>
+        </div>
+        <div v-if="GetAggregations.size">
+          <div
+            v-for="(size,size_index) in GetAggregations.size"
+            :key="size_index"
+            class="filter check-material green">
+            <input
+              type="checkbox"
+              :id="size"
+              :value="size"
+              v-model="checkboxSizeGroup"
+            >
+            <label class="chSmall" :for="size"></label>
+            {{size}} ({{15}})
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Фильтры-->
+    <!--Каталог-->
+    <div class="container">
+      <div
+        class="catalogItem"
+        v-for="(cat) in GetHits"
+        :key="cat"></div>
+    </div>
+    <!--Каталог-->
+  </div>
+  <!--Пагинация-->
+  <div class="pager">
+    <div class="pageMarker" @click="pChange(1)"><i class="icon-left-open"></i></div>
+    <div v-for="(pageNumber) in pages" :class="['pagerItem',{'active':pageNumber===page}]" :key="pageNumber">
+      {{pageNumber}}
+    </div>
+    <div class="pageMarker"><i class="icon-right-open"></i></div>
+    <div class="sum">20</div>
+  </div>
+  <!--Пагинация-->
+</div>
+<script src="./js/main.js"></script>
+</html>
+<style>
+  .content{
+    display: flex;
+    justify-content: space-between;
+  }
+  .bm-menu{
+    width: 19%;
+    height: 966px;
+    border: solid 1px #d5d5d5;
+  }
+  .container{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .catalogItem{
+    width: 19%;
+    height: 300px;
+    border: solid 1px #cfcfcf;
+    margin-bottom: 20px;
+  }
+  .colorSwatch {
+    height: 20px;
+    width: 20px;
+    margin: 2px;
+    cursor: pointer;
+    display: inline-flex;
+    border: solid #b8b797 2px;
+    transition: transform 0.5s ease, border ease 0.5s, border-radius ease 0.5s;
+  }
+  .pager {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .pagerItem, .sum {
+    height: 30px;
+    width: 30px;
+    border: solid 1px #c5c5c5;
+    color: #c5c5c5;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    line-height: 25px;
+  }
+
+  .sum {
+    width: 60px;
+    margin-right: 0;
+  }
+</style>

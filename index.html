@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/index.css" >
+</head>
+<div id="app">
+  <!--Шапка-->
+  <div class="header">
+    <a class="logo" href="/">логотип</a>
+    <div class="searchField">
+      <input
+        type="search"
+        ref="input"
+        v-model="visible"
+      >
+      <div v-show="visible" class="options" ref="optionsList">
+        <ul>
+          <li
+            v-for="(match,index_match) in matches"
+            :key="index_match"
+            :class="{'selected':(selected===index_match)}">
+            <div class="searchResult">{{match}}</div>
+            <div class="searchImage" :style="'background: url(tile.png) no-repeat  center center;background-size: cover;'"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+      <a class="cart" href="/">
+      <i class="icon-basket-1"></i>
+      <span>0</span>
+    </a>
+    <div class="adm-menu">
+    <i class="icon-user-o"></i>
+    </div>
+  </div>
+  <!--Шапка-->
+  <!--Меню-->
+  <div v-if="GetScreenSize > 847">
+    <div class="menu">
+      <div v-for="(items,menuIndex) in menu" :key="menuIndex" :class="['navbar-item', {'is-active':isActive===menuIndex}]" @mouseover="hover(menuIndex)"  @mouseout="mouseOut">
+        {{items.term}}
+        <div class="is-boxed">
+          <div class="" @click="clickMenu" v-for="(item,index) in items.children" :key="index">
+            <a href="/">{{item.term}}</a>
+          </div>
+          <div class="">
+            <img :src="'menu.jpeg'">
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+  <!--Меню-->
+  <!--Слайдер-->
+  <div class="slider">Слайдер, может быть разной ширины, от 70% до 100% настраивается пользователем, высота зависит от высоты картинок помещенных в слайдер</div>
+  <!--Слайдер-->
+  <!--Ленты новостей-->
+  <div v-if="Object.keys(services).length">
+    <div v-for="(service, index) in services" :key="index">
+      <div class="feeds">Новостная лента № {{service}}, (может быть несколько, могут быть разной ширины и высоты, настраивается пользователем)</div>
+    </div>
+  </div>
+  <!--Ленты новостей-->
+  <!--Подвал-->
+  <div class="footer">
+    <div class="footerLink" v-for="(flink,index) in footerLink" :key="index">
+        <div v-for="link in flink">
+          <a href="/">{{link.title}}</a>
+        </div>
+    </div>
+  </div>
+  <!--Подвал-->
+</div>
+<script src="./js/main.js"></script>
+</html>
+
+<style>
+  @font-face {
+    font-family: icon;
+    src: local(icon), url(font/icon.ttf);
+  }
+  .header{
+    width: 100%;
+    height: 70px;
+    border: solid 1px #d4ff00;
+  }
+  .logo{
+    display: inline-block;
+    width: 80px;
+    height: 50px;
+    border: solid 1px #98aeff;
+    color: #20207d;
+  }
+  .searchField{
+    display: inline-block;
+  }
+  .searchImage{
+    width: 40px;
+    height: 50px;
+    display: inline-block;
+    margin-right: 5px;
+    float: right;
+  }
+  .searchResult{
+    height: 50px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: 5px;
+    vertical-align: top;
+    float: left;
+  }
+  .adm-menu{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    border: solid 1px #98aeff;
+  }
+  .menu{
+    display: flex;
+  }
+  .slider{
+    width: 80%;
+    height: 200px;
+    border: solid 1px #ff0025;
+    margin: 0 auto;
+  }
+  .feeds{
+    width: 80%;
+    height: 150px;
+    border: solid 1px #12ff00;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  .is-boxed{
+    opacity: 0;
+  }
+  .is-active .is-boxed{
+    opacity: 1;
+  }
+  .cart{
+    display: inline-block;
+    width: 80px;
+    height: 50px;
+    border: solid 1px #98aeff;
+  }
+  .footer{
+    display: flex;
+    justify-content: space-around;
+  }
+</style>
