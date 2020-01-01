@@ -3,6 +3,8 @@ const app = new Vue({
     data: {
       services: [1,2,3],
       GetScreenSize: screen.width,
+      GetWindowSize: document.body.clientWidth,
+      scroll: '',
       isActive: false,
       visible: '',
       query: '',
@@ -120,6 +122,11 @@ const app = new Vue({
         ]
       }
     },
+  mounted () {
+    window.onscroll = () => {
+      this.scroll = window.pageYOffset
+    }
+  },
     methods: {
       clickMenu () {
 

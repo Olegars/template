@@ -23,7 +23,7 @@
     <div class="sum">20</div>
   </div>
   <!--Пагинация-->
-  <div class="content">
+  <div :class="['content', scroll > 20 ? 'fixed' : '']">
     <!--Фильтры-->
     <div class="bm-menu">
       <div class="terms" v-if="GetTerms">
@@ -83,6 +83,9 @@
           </div>
         </div>
       </div>
+      {{GetScreenSize}}
+      {{GetWindowSize}}
+      {{scroll}}
     </div>
     <!--Фильтры-->
     <!--Каталог-->
@@ -96,8 +99,8 @@
   </div>
   <!--Пагинация-->
   <div class="pager">
-    <div class="pageMarker" @click="pChange(1)"><i class="icon-left-open"></i></div>
-    <div v-for="(pageNumber) in pages" :class="['pagerItem',{'active':pageNumber===page}]" :key="pageNumber">
+    <div class="pageMarker"><i class="icon-left-open"></i></div>
+    <div v-for="(pageNumber) in pages" class="pagerItem" :key="pageNumber">
       {{pageNumber}}
     </div>
     <div class="pageMarker"><i class="icon-right-open"></i></div>
@@ -161,5 +164,8 @@
   .sum {
     width: 60px;
     margin-right: 0;
+  }
+  .fixed{
+    background-color: #ff0021;
   }
 </style>
