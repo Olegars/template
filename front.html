@@ -72,6 +72,16 @@
           <a href="/">{{link.title}}</a>
         </div>
     </div>
+      <div class="footerLink">
+          <div v-if="GetContacts.address" class="H3"><i class="icon-home"></i>Адрес</div>
+          {{GetContacts.address}}
+          <div v-if="GetContacts.phone" class="H3"><i class="icon-phone"></i>Телефон</div>
+          {{GetContacts.phone}}
+          <div v-if="GetContacts.email" class="H3"><i class="icon-mail-alt"></i>Email</div>
+          {{GetContacts.email}}
+          <div v-if="GetContacts.skype" class="H3"><i class="icon-skype"></i>Skype</div>
+          {{GetContacts.skype}}
+      </div>
   </div>
   <!--Подвал-->
 </div>

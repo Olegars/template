@@ -122,7 +122,13 @@ const app = new Vue({
           '85R (38DD)',
           '90S (38DD)'
         ]
-      }
+      },
+      GetContacts: {
+        address: 'Москва, ул. Косыгина ',
+        phone: '777777777',
+        email: 'www@www.ru',
+        skype: 'www'
+    }
     },
   mounted () {
     window.onscroll = () => {
